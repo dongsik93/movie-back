@@ -16,11 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from rest_framework_swagger.views import get_swagger_view
+from rest_framework_jwt.views import obtain_jwt_token
 
 v = get_swagger_view(title="영화정보제공!!")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include("movies.urls")),
-    path('',v)
+    path('',v),
+    path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('api-token-auth/', obtain_jwt_token),
 ]
