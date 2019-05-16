@@ -57,6 +57,10 @@ class MovieDetail(models.Model):
     Participating = models.CharField(max_length=100)
     # 리뷰
     score_reples = models.TextField()
+    # 리뷰 아이디
+    score_reple_id = models.TextField()
+    # 리뷰 공감
+    score_reple_like = models.TextField()
     
     dialog = models.CharField(max_length=100)
     
@@ -110,6 +114,10 @@ class OurMovieDetail(models.Model):
     Participating = models.CharField(max_length=100)
     # 리뷰
     score_reples = models.TextField()
+    # 리뷰 아이디
+    score_reple_id = models.TextField()
+    # 리뷰 공감
+    score_reple_like = models.TextField()
     
     dialog = models.CharField(max_length=100)
     

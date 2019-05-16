@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Genre, Movie, Score, MovieCd, MovieDetail, OurMovieCd, OurMovieDetail
 from .serializers import GenreSerializers, MovieSerializers, GenreDetailSerializers,ScoreSerializers, MovieCdSerializers, MovieDetailSerializers, OurMovieCdSerializers, OurMovieDetailSerializers
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes,authentication_classes
 import requests
 
 import urllib.request as ul
@@ -13,9 +13,11 @@ from django.conf import settings
 import urllib.request
 from bs4 import BeautifulSoup
 
-
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
+@authentication_classes(())
+@permission_classes((IsAuthenticated, ))
 @api_view(['GET'])
 def genre_list(request):
     genres = Genre.objects.all()
@@ -251,6 +253,16 @@ def api_request(request):
         score_reples = soup.find_all('div',{'class':'score_reple'})
         for score_reple in score_reples :
             movie_score_reples.append(score_reple.p.text)
+            
+        movie_score_reple_ids = []
+        for score_reple in score_reples :
+            movie_score_reple_ids.append(score_reple.dl.dt.em.a.span.text)
+        
+        movie_score_reple_likes = []
+        reple_likes = soup.find_all('div',{'class':'btn_area'})
+        for reple_like in reple_likes :
+            movie_score_reple_likes.append(reple_like.strong.span.text)
+        
         # 리뷰 끝
         
         # 와이드 이미지 시작
@@ -282,6 +294,8 @@ def api_request(request):
                 rating = movie_rating,
                 Participating = format(float(movie_Participating)/2,".2f"),
                 score_reples = movie_score_reples,
+                score_reple_id = movie_score_reple_ids,
+                score_reple_like = movie_score_reple_likes,
                 movieCd = movie.movieCd,
                 rank = movie.rank,
                 audiAcc = movie.audiAcc, 
@@ -299,7 +313,7 @@ def base_api_request(request):
     #리셋
     global date
     weekly = date.today()
-    for i in range(3):
+    for i in range(52):
         weekly -= timedelta(7)
         startday = weekly.strftime('%Y%m%d')
         url = f"http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key={token}&targetDt=" + str(startday)
@@ -327,6 +341,7 @@ def base_api_request(request):
             if mo[1] :
                 mo[0].audiAcc = movie.get('audiAcc')
                 mo[0].save()
+            print(mo[0])
  
  
  
@@ -450,6 +465,15 @@ def base_api_request(request):
         score_reples = soup.find_all('div',{'class':'score_reple'})
         for score_reple in score_reples :
             movie_score_reples.append(score_reple.p.text)
+            
+        movie_score_reple_ids = []
+        for score_reple in score_reples :
+            movie_score_reple_ids.append(score_reple.dl.dt.em.a.span.text)
+        
+        movie_score_reple_likes = []
+        reple_likes = soup.find_all('div',{'class':'btn_area'})
+        for reple_like in reple_likes :
+            movie_score_reple_likes.append(reple_like.strong.span.text)
         # 리뷰 끝
 
         # 와이드 이미지 시작
@@ -482,6 +506,8 @@ def base_api_request(request):
                 rating = movie_rating,
                 Participating = format(float(movie_Participating)/2,".2f"),
                 score_reples = movie_score_reples,
+                score_reple_id = movie_score_reple_ids,
+                score_reple_like = movie_score_reple_likes,
                 movieCd = movie.movieCd,
                 audiAcc = movie.audiAcc, 
                 show1 = "false",
@@ -492,8 +518,6 @@ def base_api_request(request):
         
         
     return Response("??")
-
-
 
 
 

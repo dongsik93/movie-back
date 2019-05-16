@@ -31,7 +31,7 @@ class MovieCdSerializers(serializers.ModelSerializer):
 class MovieDetailSerializers(serializers.ModelSerializer):
     class Meta :
         model = MovieDetail
-        fields = ['id','movieCd','rank','audiAcc','movieNm','showTm','openDt','nationNm','genres','actors','actors_img','actors_role','watchGradeNm','dialog','image_url','large_image','story','rating','Participating','score_reples']
+        fields = ['id','movieCd','rank','audiAcc','movieNm','showTm','openDt','nationNm','genres','actors','actors_img','actors_role','watchGradeNm','dialog','image_url','large_image','story','rating','Participating','score_reples','score_reple_id','score_reple_like']
 
 class OurMovieCdSerializers(serializers.ModelSerializer):
     class Meta :
@@ -41,4 +41,4 @@ class OurMovieCdSerializers(serializers.ModelSerializer):
 class OurMovieDetailSerializers(serializers.ModelSerializer):
     class Meta :
         model = OurMovieDetail
-        fields = ['id','movieCd','audiAcc','movieNm','showTm','openDt','nationNm','genres','actors','actors_img','actors_role','watchGradeNm','dialog','image_url','large_image','story','rating','Participating','score_reples','average']
+        fields = ['id','movieCd','audiAcc','movieNm','showTm','openDt','nationNm','genres','actors','actors_img','actors_role','watchGradeNm','dialog','image_url','large_image','story','rating','Participating','score_reples','average','score_reple_id','score_reple_like']
