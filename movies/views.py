@@ -13,11 +13,13 @@ from django.conf import settings
 import urllib.request
 from bs4 import BeautifulSoup
 
-from rest_framework.permissions import IsAuthenticated
+# from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
-@authentication_classes(())
-@permission_classes((IsAuthenticated, ))
+
+
+# @authentication_classes(())
+# @permission_classes((IsAuthenticated, ))
 @api_view(['GET'])
 def genre_list(request):
     genres = Genre.objects.all()
