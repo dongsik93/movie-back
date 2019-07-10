@@ -68,7 +68,7 @@ def scores(request,score_id):
     else :
         serializer = ScoreSerializers(score)
         return Response(serializer.data)
-      
+
 @api_view(['GET'])
 def ourmovies_list(request) :
     movies = OurMovieDetail.objects.all()
