@@ -87,49 +87,49 @@ class OurMovieDetail(models.Model):
     # 영화이름
     movieNm = models.CharField(max_length=100)
     # 상영시간
-    showTm = models.IntegerField()
+    showTm = models.IntegerField(null=True)
     # 개봉일자
-    openDt = models.DateField()
+    openDt = models.DateField(null=True)
     # 국가명
-    nationNm = models.CharField(max_length=100)
+    nationNm = models.CharField(max_length=100,null=True)
     # 장르
-    genres = models.CharField(max_length=100)
+    genres = models.CharField(max_length=100,null=True)
     # 영화배우들
-    actors = models.CharField(max_length=100)
+    actors = models.CharField(max_length=100,null=True)
     # 영화배우 사진
-    actors_img = models.CharField(max_length=100)
+    actors_img = models.CharField(max_length=100,null=True)
     # 영화 배우 역할
-    actors_role = models.CharField(max_length=100)
+    actors_role = models.CharField(max_length=100,null=True)
     # 관람등급
-    watchGradeNm = models.CharField(max_length=100)
+    watchGradeNm = models.CharField(max_length=100,null=True)
     # image_url
-    image_url = models.CharField(max_length=100)
+    image_url = models.CharField(max_length=100,null=True)
     # large_image
-    large_image = models.CharField(max_length=200)
+    large_image = models.CharField(max_length=200,null=True)
     # 줄거리
-    story = models.TextField()
+    story = models.TextField(null=True)
     # 평점
-    rating = models.CharField(max_length=100)
+    rating = models.CharField(max_length=100,null=True)
     # 평점 참여 
-    Participating = models.CharField(max_length=100)
+    Participating = models.CharField(max_length=100,null=True)
     # 리뷰
-    score_reples = models.TextField()
+    score_reples = models.TextField(null=True)
     # 리뷰 아이디
-    score_reple_id = models.TextField()
+    score_reple_id = models.TextField(null=True)
     # 리뷰 공감
-    score_reple_like = models.TextField()
+    score_reple_like = models.TextField(null=True)
     
-    dialog = models.CharField(max_length=100)
+    dialog = models.CharField(max_length=100,null=True)
     
     # for문을 이용해서 MovieCd의 정보를 가져와서 저장할 스키마
     # 영화코드
-    movieCd = models.TextField()
+    movieCd = models.TextField(null=True)
     # 누적관객수
-    audiAcc = models.TextField()
+    audiAcc = models.TextField(null=True)
     
-    show1=models.CharField(max_length=100)
+    show1=models.CharField(max_length=100,null=True)
     
-    show2=models.CharField(max_length=100)
+    show2=models.CharField(max_length=100,null=True)
 
     # 평균평점
     average = models.FloatField(null=True)
