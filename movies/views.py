@@ -15,12 +15,14 @@ from bs4 import BeautifulSoup
 import ssl
 from bs4 import Comment
 # from rest_framework.permissions import IsAuthenticated
+# from rest_framework.authentication import JSONWebToeknAuthentication
+
 # Create your views here.
 
 context = ssl._create_unverified_context()
 
 
-# @authentication_classes(())
+# @authentication_classes((JSONWebToeknAuthentication))
 # @permission_classes((IsAuthenticated, ))
 @api_view(['GET'])
 def genre_list(request):
